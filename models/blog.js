@@ -13,6 +13,14 @@ const blogSchema = new Schema({
     body: {
         type: String,
         required: true
+    },
+    ip: {
+        type: String,
+        required: true
+    },
+    author: {
+        type: String,
+        required: true
     }
 }, {timeseries: true});
 

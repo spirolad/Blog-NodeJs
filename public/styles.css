@@ -76,6 +76,23 @@
       border-radius: 50%;
       padding: 8px;
     }
+
+    .error-message-show{
+      position: absolute;
+      top: 30;
+      right: 0;
+      color: red;
+      display: block;
+    }
+
+    .error-message-hidden{
+      position: absolute;
+      top: 30;
+      right: 0;
+      display: none;
+      color: red;
+    }
+
     .delete:hover{
       cursor: pointer;
       box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
@@ -108,4 +125,10 @@
       border: 0;
       font-size: 1.2em;
       cursor: pointer;
+    }
+
+    .author {
+      font-size: 12px;
+      padding-left: 20px;
+      padding-top: 20px;
     }

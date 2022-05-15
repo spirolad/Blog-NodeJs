@@ -15,10 +15,10 @@ const blog_index = (req, res) => {
     const id = req.params.id;
     Blog.findById(id)
       .then(result => {
-        res.render('details', { blog: result, title: result.title });;
+        res.render('details', { blog: result, title: result.title, author: result.author });;
       })
       .catch(err => {
-        console.log(err);
+        res.status(404).render('404', {title: 'Blog introuvable'})
       });
   }
   
@@ -27,7 +27,15 @@ const blog_index = (req, res) => {
   }
   
   const blog_create_post = (req, res) => {
-    const blog = new Blog(req.body);
+    var idAddress = req.header('x-forwarded-for') || req.connection.remoteAddress;
+    console.log(idAddress);
+    const blog = new Blog({
+      title: req.body.title, 
+      snippet: req.body.snippet,
+      body: req.body.body,
+      ip: idAddress,
+      author: req.body.author
+    });
     blog.save()
       .then(result => {
         res.redirect('/blogs');
@@ -39,9 +47,17 @@ const blog_index = (req, res) => {
   
   const blog_delete = (req, res) => {
     const id = req.params.id;
-    Blog.findByIdAndDelete(id)
+    var idAddress = req.header('x-forwarded-for') || req.connection.remoteAddress;
+    Blog.findById(id)
       .then(result => {
-        res.json({ redirect: '/blogs' });
+        if(result.ip === idAddress) {
+          Blog.findByIdAndDelete(id).then(
+            res.json({success: true, redirect: '/blogs' })
+          )
+          .catch(err => res.status(404).render('404', {title: 'Blog introuvable'}));
+        } else {
+          res.json({success: false});
+        }
       })
       .catch(err => {
         res.status(404).render('404', {title: 'Blog introuvable'})

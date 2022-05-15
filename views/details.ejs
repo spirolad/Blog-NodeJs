@@ -9,9 +9,11 @@
     <div class="content">
       <p><%= blog.body %></p>
     </div>
+    <p class="error-message-hidden" id="error-message">Vous n'êtes pas l'auteur de ce blog</p>
     <a class="delete" data-doc="<%= blog._id %>">
       <img src="/trashcan.svg" alt="delete icon">
     </a>
+    <span class="author">Auteur: <%= blog.author %></span>
   </div>
 
   <%- include("./partials/footer.ejs") %>
@@ -24,7 +26,16 @@
         method: 'DELETE',
       })
       .then(response => response.json())
-      .then(data => window.location.href = data.redirect)
+      .then(data => {
+        if(data.success == true){
+          window.location.href = data.redirect
+        } else {
+          // Show error message
+          message = document.getElementById("error-message");
+          message.classList.add("error-message-show");
+          message.classList.remove("error-message-hidden");
+        }
+      })
       .catch(err => console.log(err));
     });
     
