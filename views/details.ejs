@@ -6,6 +6,7 @@
 
   <div class="details content">
     <h2><%= blog.title %></h2>
+    <span class="author">Auteur: <%= blog.author %></span>
     <div class="content">
       <p><%= blog.body %></p>
     </div>
@@ -13,7 +14,10 @@
     <a class="delete" data-doc="<%= blog._id %>">
       <img src="/trashcan.svg" alt="delete icon">
     </a>
-    <span class="author">Auteur: <%= blog.author %></span>
+    <% if(blog.illustration != "x"){ %>
+      <img class="illustration" src="/uploads/<%= blog.illustration %>" alt="illustration">
+      <br/>
+    <%}%> 
   </div>
 
   <%- include("./partials/footer.ejs") %>

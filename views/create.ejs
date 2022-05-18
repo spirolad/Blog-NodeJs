@@ -6,15 +6,17 @@
   <%- include('./partials/nav.ejs') %>
 
     <div class="create-blog content">
-        <form action="/blogs" method="POST">
+        <form action="/blogs" method="POST" enctype="multipart/form-data">
           <label for="title">Titre du blog:</label>
           <input type="text" id="title" name="title" required>
           <label for="author">Auteur du blog:</label>
           <input type="text" id="author" name="author" required>
           <label for="snippet">Extrait du blog:</label>
           <input type="text" id="snippet" name="snippet" required>
-          <label for="body">Contenu du blog:</label>
+          <label for="body">Contenu du blog:</label> 
           <textarea id="body" name="body" required></textarea>
+          <label for="image">Illustration (facultative):</label>
+          <input type="file" id="file" name="file">
           <button>Créer</button>
         </form>
       </div>

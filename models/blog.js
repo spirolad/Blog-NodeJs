@@ -21,6 +21,10 @@ const blogSchema = new Schema({
     author: {
         type: String,
         required: true
+    },
+    illustration: {
+        type: String,
+        required: true
     }
 }, {timeseries: true});
 
