@@ -7,7 +7,7 @@ const upload = require('express-fileupload');
 
 const app = express();
 
-const dbURI = "mongodb+srv://rooot:damienisbald@node.pha9j.mongodb.net/Node?retryWrites=true&w=majority";
+const dbURI = "mongodb+srv://:@node.pha9j.mongodb.net/Node?retryWrites=true&w=majority";
 mongoose.connect(dbURI)
     .then((result) => {
         app.listen(80);
