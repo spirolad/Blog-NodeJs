@@ -20,23 +20,6 @@ app.use(upload());
 app.use(express.static('public'));
 app.use(morgan('dev'));
 
-/*app.post('/upload', function(req, res){
-    if(req.files){
-        var file = req.files.file;
-        var filename = file.name;
-        console.log(filename);
-
-        file.mv('./public/uploads/' + filename, function(err) {
-            if(err){
-                res.send(err);
-            } else {
-                res.send('File uploaded successfully');
-            }
-        });
-    }
-    console.log(req.files);
-}); */
-
 app.get('/', (req, res) => {
     res.redirect('/blogs');
 
